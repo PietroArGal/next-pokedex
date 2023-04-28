@@ -5,7 +5,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import PokemonCard from "../components/pokeCard";
 import TopBar from "@capoo/components/topBar";
 
-
 type PokemonList = {
   name: string;
   url: string;
@@ -47,9 +46,9 @@ const HomePage: NextPage<Props> = ({ pokemonList }) => {
     <div>
       <TopBar />
       <InfiniteScroll dataLength={allPokemon.length} next={loadMore} hasMore={true} loader={undefined}>
-        <div className="grid grid-cols-4 gap-2 mt-20">
-          {allPokemon.map((pokemon) => (
-            <PokemonCard key={pokemon.name} name={pokemon.name} imageUrl={pokemon.image} types={pokemon.types} />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-2 mt-14 ml-2 mr-2">
+          {allPokemon.map((pokemon, index) => (
+            <PokemonCard key={pokemon.name} id={index + 1} name={pokemon.name} imageUrl={pokemon.image} types={pokemon.types} />
           ))}
         </div>
       </InfiniteScroll>
