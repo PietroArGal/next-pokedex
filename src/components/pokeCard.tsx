@@ -1,13 +1,31 @@
-import { Props } from '../interfaces/pokeProps'
+import React from 'react';
+import styles from '../styles/PokeColor.module.css'
 
-export default function PokemonCard({ pokemon }: Props) {
+type PokemonCardProps = {
+    name: string;
+    imageUrl: string;
+    types: string[];
+};
+
+const PokemonCard = ({ name, imageUrl, types }: PokemonCardProps) => {
     return (
-        <div className="p-4 max-w-xs mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-            <img src={pokemon.image} alt={pokemon.name} className="w-full" />
-            <div className="px-6 py-4">
-                <h1 className="text-lg font-bold mb-2">{pokemon.name}</h1>
-                <p className="text-gray-700 text-base">{`#${pokemon.id}`}</p>
+        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg">
+
+            <img src={imageUrl} alt={name} className="h-54 w-full object-cover" />
+            <div className="px-4 py-2">
+                <h2 className="text-xl font-bold mb-2 capitalize">{name}</h2>
+                <div className="flex flex-wrap">
+                    {types.map((type) => (
+                        <span key={type}
+                            className={`${styles[`type-${type.toLowerCase()}`]} inline-block rounded-lg px-2 py-1 text-xs font-bold mr-2 capitalize text-white`}
+                        >
+                            {type}
+                        </span>
+                    ))}
+                </div>
             </div>
         </div>
     );
-}
+};
+
+export default PokemonCard;
